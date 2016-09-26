@@ -1,4 +1,4 @@
-package net.hjhjw1991.toolbox;
+package net.hjhjw1991.toolbox.tools;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import net.hjhjw1991.settings.SettingManager;
 import net.hjhjw1991.settings.SettingsActivity;
+import net.hjhjw1991.toolbox.R;
 
 /**
  * Created by huangjun on 16-9-26.

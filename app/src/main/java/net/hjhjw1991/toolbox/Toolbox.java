@@ -15,6 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import net.hjhjw1991.settings.SettingsActivity;
+import net.hjhjw1991.toolbox.exception.AlreadyRegisteredException;
+import net.hjhjw1991.toolbox.tools.OfflineTool;
+import net.hjhjw1991.toolbox.tools.OnlineTool;
+import net.hjhjw1991.toolbox.tools.ToolFragment;
+import net.hjhjw1991.toolbox.tools.Xingjiabi;
 
 public class Toolbox extends AppCompatActivity {
     private static final String TAG = "Toolbox";
@@ -58,9 +63,12 @@ public class Toolbox extends AppCompatActivity {
         if(mFragments.size() == 0) {
             ToolFragment tmp;
             tmp = new OfflineTool();
+            initOfflineTool(tmp);
             mFragments.put(0, tmp);
 
+
             tmp = new OnlineTool();
+            initOnlineTool(tmp);
             mFragments.put(1, tmp);
 
             for(int k = 0; k < mFragments.size(); k++){
@@ -70,6 +78,18 @@ public class Toolbox extends AppCompatActivity {
                 mFragmentTransaction.commit();
             }
         }
+    }
+
+    private void initOfflineTool(ToolFragment tmp) {
+        try {
+            tmp.register(new Xingjiabi(getResources().getDrawable(R.drawable.ic_info_black_24dp)));
+        }catch(AlreadyRegisteredException e){
+            LOGD("sss", e.toString());
+        }
+    }
+
+    private void initOnlineTool(ToolFragment tmp){
+        return;
     }
 
     private void invalidateToolViews() {
