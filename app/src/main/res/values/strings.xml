@@ -71,4 +71,12 @@
     <string name="offline_tool_bar">离线工具</string>
     <string name="online_tool_bar">在线工具</string>
     <string name="to_be_continued">TO BE CONTINUED</string>
+    <string name="good_index">商品序号</string>
+    <string name="name">名称</string>
+    <string name="price">价格</string>
+    <string name="xingjiabi">性价比</string>
+    <string name="hint_no_goods">还没有添加商品,在下方添加</string>
+    <string name="amount_weight">数量(重量)</string>
+    <string name="add">添加</string>
+    <string name="delete">删除</string>
 </resources>

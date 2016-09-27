@@ -3,6 +3,7 @@ package net.hjhjw1991.toolbox.tools;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,19 @@ import java.util.HashMap;
 public class OfflineTool extends ToolFragment {
     private OfflineAdapter mAdapter;
     private RecyclerView mRecyclerView;
-    public OfflineTool(){
+
+    public OfflineTool() {
         layout = R.layout.offline_tool;
         mRegisteredTool = new ArrayList<>();
         mRegisteredToolMap = new HashMap<>();
         mAdapter = new OfflineAdapter(mRegisteredTool);
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(layout, container, false);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.offline_tool_list);
@@ -32,18 +40,20 @@ public class OfflineTool extends ToolFragment {
         return root;
     }
 
-    public boolean shouldShow(){
+    public boolean shouldShow() {
         return true;
     }
 
     private class OfflineAdapter extends RecyclerView.Adapter {
-        private class ViewHolder extends RecyclerView.ViewHolder{
+        private class ViewHolder extends RecyclerView.ViewHolder {
             public ViewHolder(View itemView) {
                 super(itemView);
             }
         }
+
         private ArrayList<Tool> mData;
-        OfflineAdapter(ArrayList<Tool> data){
+
+        OfflineAdapter(ArrayList<Tool> data) {
             mData = data;
         }
 
@@ -70,7 +80,7 @@ public class OfflineTool extends ToolFragment {
 
         @Override
         public int getItemCount() {
-            return mData == null? 0:mData.size();
+            return mData == null ? 0 : mData.size();
         }
     }
 }

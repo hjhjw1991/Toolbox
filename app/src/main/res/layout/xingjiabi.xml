@@ -1,9 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/good_topbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/to_be_continued"/>
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:text="@string/good_index" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:textSize="20sp"
+            android:text="@string/name" />
+
+        <TextView
+            android:id="@+id/good_topbar_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:textSize="20sp"
+            android:text="@string/price" />
+
+        <TextView
+            android:id="@+id/good_topbar_xingjiabi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:textSize="20sp"
+            android:text="@string/xingjiabi" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/good_add_hint"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/hint_no_goods"
+        android:textAlignment="center" />
+
+        <ListView
+            android:id="@+id/good_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:id="@+id/good_add_pane"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/good_add_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:hint="@string/name"/>
+
+            <EditText
+                android:id="@+id/good_add_price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/price"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/good_add_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="@string/amount_weight"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/good_add_add"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/add" />
+        </LinearLayout>
 </LinearLayout>
