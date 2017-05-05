@@ -103,7 +103,7 @@ public class Toolbox extends AppCompatActivity {
         try {
             for(Class<? extends Tool> tool: mOfflineToolMap.keySet()) {
                 Bitmap originIcon = BitmapFactory.decodeResource(getResources(), mOfflineToolMap.get(tool));
-                Bitmap scaledIcon = Bitmap.createScaledBitmap(originIcon, 400, 400, true);// todo refactor
+                Bitmap scaledIcon = Bitmap.createScaledBitmap(originIcon, 200, 200, true);// todo refactor
                 tmp.register(tool.newInstance().setIcon(scaledIcon));
             }
         } catch(AlreadyRegisteredException | InstantiationException | IllegalAccessException e) {

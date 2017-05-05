@@ -28,22 +28,4 @@ public class JUnitTest {
         assertThat(Math.abs(good.xingjiabi - 10/100f), is(equalTo(0f)));
         System.out.println("Good:"+good.name + " xingjiabi:" + good.xingjiabi);
     }
-
-    @Test
-    public void xingjiabi_sort_isCorrect() throws Exception {
-        XingjiabiActivity activity = new XingjiabiActivity();
-        float[] price = {99, 100, 10, 0};
-        int[] amount = {5, 10, -5, 1};
-        float[] expect = {Integer.MAX_VALUE>>4, 10/100f, 5/99f, 0};
-        for(int i=0;i<price.length;i++){
-            XingjiabiActivity.Good good = activity.new Good("test Good"+i);
-            good.setPrice(price[i]).setAmount(amount[i]).commit();
-            activity.add(good);
-        }
-        for(int i=0;i<activity.getGoods().size();i++){
-            XingjiabiActivity.Good g = activity.getGoods().get(i);
-            assertThat(g.xingjiabi, is(equalTo(expect[i])));
-            System.out.println("Good:" + g.name + " xingjiabi:" + g.xingjiabi);
-        }
-    }
 }
