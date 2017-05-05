@@ -3,18 +3,18 @@ package net.hjhjw1991.toolbox.tools;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import net.hjhjw1991.toolbox.R;
+import net.hjhjw1991.toolbox.ui.ToolFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
+/**offline tools
  * Created by huangjun on 16-9-26.
  */
 public class OfflineTool extends ToolFragment {
@@ -38,6 +38,12 @@ public class OfflineTool extends ToolFragment {
         mRecyclerView = (RecyclerView) root.findViewById(R.id.offline_tool_list);
         mRecyclerView.setAdapter(mAdapter);
         return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.out.println("onDestroyView, check leaks");
     }
 
     public boolean shouldShow() {
@@ -68,7 +74,7 @@ public class OfflineTool extends ToolFragment {
             Tool t = mData.get(position);
             ImageButton ib = (ImageButton) holder.itemView.findViewById(R.id.icon_button);
             final Class target = t.getTargetActivity();
-            ib.setImageDrawable(t.getIconDrawable());
+            ib.setImageBitmap(t.getIcon());
             ib.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

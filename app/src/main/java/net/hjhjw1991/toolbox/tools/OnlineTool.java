@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import net.hjhjw1991.settings.SettingManager;
 import net.hjhjw1991.settings.SettingsActivity;
 import net.hjhjw1991.toolbox.R;
+import net.hjhjw1991.toolbox.ui.ToolFragment;
 
 /**
  * Created by huangjun on 16-9-26.

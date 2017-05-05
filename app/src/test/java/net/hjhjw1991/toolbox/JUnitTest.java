@@ -2,16 +2,12 @@ package net.hjhjw1991.toolbox;
 
 import android.content.Context;
 
-import net.hjhjw1991.toolbox.tools.XingjiabiActivity;
+import net.hjhjw1991.toolbox.ui.XingjiabiActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
@@ -28,7 +24,7 @@ public class JUnitTest {
     public void xingjiabi_set_isCorrect() throws Exception {
         XingjiabiActivity activity = new XingjiabiActivity();
         XingjiabiActivity.Good good = activity.new Good("test Good");
-        good.setPrice(100).setAmount(10);
+        good.setPrice(100).setAmount(10).commit();
         assertThat(Math.abs(good.xingjiabi - 10/100f), is(equalTo(0f)));
         System.out.println("Good:"+good.name + " xingjiabi:" + good.xingjiabi);
     }
@@ -41,7 +37,7 @@ public class JUnitTest {
         float[] expect = {Integer.MAX_VALUE>>4, 10/100f, 5/99f, 0};
         for(int i=0;i<price.length;i++){
             XingjiabiActivity.Good good = activity.new Good("test Good"+i);
-            good.setPrice(price[i]).setAmount(amount[i]);
+            good.setPrice(price[i]).setAmount(amount[i]).commit();
             activity.add(good);
         }
         for(int i=0;i<activity.getGoods().size();i++){

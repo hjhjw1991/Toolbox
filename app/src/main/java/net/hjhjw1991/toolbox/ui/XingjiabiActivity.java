@@ -1,15 +1,15 @@
-package net.hjhjw1991.toolbox.tools;
+package net.hjhjw1991.toolbox.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,26 +23,32 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-/**
+/**Value Over Price UI
  * Created by HuangJun on 2016/9/26.
  */
 public class XingjiabiActivity extends Activity {
+    private static final String TAG = XingjiabiActivity.class.getSimpleName();
     private ArrayList<Good> mGoods;
-    private ListView mGoodList;
-    private GoodAdapter mAdapter;
     private Comparator<Good> mComparator;
-    private TextView mTopbarPrice;
-    private TextView mTopbarXingjiabi;
     private PriceAscend pa;
     private PriceDescend pd;
     private boolean isPriceAscend = false;
     private XingjiabiAscend xa;
     private XingjiabiDescend xd;
     private boolean isXingjiabiDescend = false;
+
+    private ListView mGoodList;
+    private GoodAdapter mAdapter;
+    private TextView mTopbarPrice;
+    private TextView mTopbarXingjiabi;
     private EditText mGoodNameView;
     private EditText mGoodPriceView;
     private EditText mGoodAmountView;
     private TextView mGoodAddHint;
+
+    private Handler mHandler;
+    private static final int MSG_UPDATE_ITEM = 1;
+    private static final int MSG_UPDATE_ITEM_ORDER = 2;
 
     public ArrayList<Good> getGoods() {
         return mGoods;
@@ -52,6 +58,9 @@ public class XingjiabiActivity extends Activity {
         super();
         mGoods = new ArrayList<>();
         mComparator = xd = new XingjiabiDescend();
+        xa = new XingjiabiAscend();
+        pd = new PriceDescend();
+        pa = new PriceAscend();
     }
 
     @Override
@@ -59,6 +68,22 @@ public class XingjiabiActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xingjiabi);
         initViews();
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch(msg.what) {
+                    case MSG_UPDATE_ITEM:
+                        onDataSetChanged();
+                        performSort();
+                        break;
+                    case MSG_UPDATE_ITEM_ORDER:
+                        performSort();
+                        break;
+                    default:
+                        Log.i(TAG, "unhandled message " + msg.what);
+                }
+            }
+        };
     }
 
     private void initViews(){
@@ -98,8 +123,9 @@ public class XingjiabiActivity extends Activity {
                         || TextUtils.isEmpty(mGoodAmountView.getText())))
                 {
                     Good good = new Good(mGoodNameView.getText().toString());
-                    good.setPrice(Float.valueOf(mGoodPriceView.getText().toString()))
-                            .setAmount(Integer.valueOf(mGoodAmountView.getText().toString()));
+                    good.setPrice(Float.parseFloat(mGoodPriceView.getText().toString()))
+                            .setAmount(Integer.parseInt(mGoodAmountView.getText().toString()))
+                            .commit();
                     add(good);
                     mGoodPriceView.setText("");
                     mGoodAmountView.setText("");
@@ -114,12 +140,13 @@ public class XingjiabiActivity extends Activity {
 
     public void add(Good good) {
         mGoods.add(good);
-        onDataSetChanged();
+        mHandler.sendEmptyMessage(MSG_UPDATE_ITEM);
     }
 
     public void remove(int index) {
-        mGoods.remove(index);
-        onDataSetChanged();
+        Good deleted = mGoods.remove(index);
+        Log.i(TAG, "delete: " + index + " " + deleted.price + " " + deleted.xingjiabi);
+        mHandler.sendEmptyMessage(MSG_UPDATE_ITEM);
     }
 
     private void onDataSetChanged(){
@@ -128,50 +155,30 @@ public class XingjiabiActivity extends Activity {
         }else if(!mGoods.isEmpty() && mGoodAddHint.isShown()){
             mGoodAddHint.setVisibility(View.GONE);
         }
-        mAdapter.notifyDataSetChanged();
     }
 
-    private void onDataOrderChanged(){//todo why not working?
+    private void performSort(){
         Collections.sort(mGoods, mComparator);
-        Log.d("sss", "price ascend changed " + isPriceAscend);
-        for(Good good: mGoods){
-            Log.d("sss", good.price+"");
-        }
-        for(int i=0;i<mAdapter.getCount();i++){
-            Good good = (Good) mAdapter.getItem(i);
-            Log.d("sss", good.price+"");
-        }
+        Log.d(TAG, "performSort");
         mAdapter.notifyDataSetChanged();
     }
 
     public void priceAscend(boolean ascend){
-        if(pa == null){
-            pa = new PriceAscend();
-        }
-        if(pd == null){
-            pd = new PriceDescend();
-        }
         if(ascend){
             mComparator = pa;
         }else{
             mComparator = pd;
         }
-        onDataOrderChanged();
+        mHandler.sendEmptyMessage(MSG_UPDATE_ITEM_ORDER);
     }
 
     public void xingjiabiDescend(boolean descend){
-        if(xa == null){
-            xa = new XingjiabiAscend();
-        }
-        if(xd == null){
-            xd = new XingjiabiDescend();
-        }
         if(descend){
             mComparator = xd;
         }else{
             mComparator = xa;
         }
-        onDataOrderChanged();
+        mHandler.sendEmptyMessage(MSG_UPDATE_ITEM_ORDER);
     }
 
 
@@ -187,14 +194,12 @@ public class XingjiabiActivity extends Activity {
 
         public Good setPrice(float price) {
             this.price = price;
-            onDataChanged();
             return this;
         }
 
         public Good setAmount(int amount) {
             if (amount != this.amount) {
                 this.amount = amount;
-                onDataChanged();
             }
             return this;
         }
@@ -203,7 +208,7 @@ public class XingjiabiActivity extends Activity {
             this.name = name;
         }
 
-        private void onDataChanged() {
+        public Good commit() {
             if (price > 0 && amount > 0) {
                 xingjiabi = amount / price;
             } else if (price <= 0) {
@@ -211,49 +216,40 @@ public class XingjiabiActivity extends Activity {
             } else {
                 xingjiabi = 0;
             }
+            return this;
         }
     }
 
-    private class XingjiabiDescend implements Comparator {
+    private class XingjiabiDescend implements Comparator<Good> {
         @Override
-        public int compare(Object lhs, Object rhs) {
-            if (lhs instanceof Good && rhs instanceof Good) {
-                Good l = (Good) lhs;
-                Good r = (Good) rhs;
-                return (r.xingjiabi - l.xingjiabi) > 0 ? 1 : -1;
-            }
-            return 1;
+        public int compare(Good lhs, Good rhs) {
+            return (rhs.xingjiabi - lhs.xingjiabi) > 0 ? 1 : -1;
         }
     }
 
     private class XingjiabiAscend extends XingjiabiDescend{
-        public int compare(Object lhs, Object rhs){
+        public int compare(Good lhs, Good rhs){
             return -super.compare(lhs, rhs);
         }
     }
 
-    private class PriceAscend implements Comparator {
+    private class PriceAscend implements Comparator<Good> {
         @Override
-        public int compare(Object lhs, Object rhs) {
-            if (lhs instanceof Good && rhs instanceof Good) {
-                Good l = (Good) lhs;
-                Good r = (Good) rhs;
-                return (r.price - l.price) > 0 ? -1 : 1;
-            }
-            return 1;
+        public int compare(Good lhs, Good rhs) {
+            return (rhs.price - lhs.price) > 0 ? -1 : 1;
         }
     }
 
     private class PriceDescend extends PriceAscend{
-        public int compare(Object lhs, Object rhs){
+        public int compare(Good lhs, Good rhs){
             return -super.compare(lhs, rhs);
         }
     }
 
     private class GoodAdapter extends BaseAdapter {
-        private ArrayList<Good> items = mGoods;
+        private ArrayList<Good> items;
 
-        public GoodAdapter(ArrayList data) {
+        GoodAdapter(ArrayList<Good> data) {
             this.items = data;
         }
 
@@ -278,13 +274,13 @@ public class XingjiabiActivity extends Activity {
             if (view == null || view.getTag() == null) {
                 holder = new ViewHolder();
                 holder.v = (LinearLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.good_item, null);
-                holder.item = items.get(i);
                 holder.v.setTag(holder);
                 holder.v.setOnTouchListener(new View.OnTouchListener() {
                     private int mLastX;
                     private LinearLayout view;
 
                     public boolean onTouch(View v, MotionEvent event) {
+                        // todo 添加动画: 左滑, 右滑
                         view = (LinearLayout) v;
                         int x = (int) event.getX();
                         int y = (int) event.getY();
@@ -312,6 +308,7 @@ public class XingjiabiActivity extends Activity {
             } else {
                 holder = (ViewHolder) view.getTag();
             }
+            holder.item = items.get(i);
             holder.mapItemToView(i);
             return holder.v;
         }
@@ -338,6 +335,7 @@ public class XingjiabiActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         remove(i);
+                        v.setVisibility(View.GONE);
                     }
                 });
             }
