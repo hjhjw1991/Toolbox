@@ -1,4 +1,6 @@
 language: android
+jdk: oraclejdk7
+
 android:
   components:
       - tools
@@ -8,6 +10,10 @@ android:
       - android-23
 
       - sys-img-armeabi-v7a-android-23
+      - extra-android-m2repository
+      - extra-android-support
+  licenses:
+      - '.+'
 branches:
   only:
     - master
