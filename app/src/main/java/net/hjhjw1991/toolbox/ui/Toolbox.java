@@ -20,10 +20,9 @@ import net.hjhjw1991.settings.SettingsActivity;
 import net.hjhjw1991.toolbox.BuildConfig;
 import net.hjhjw1991.toolbox.R;
 import net.hjhjw1991.toolbox.exception.AlreadyRegisteredException;
-import net.hjhjw1991.toolbox.tools.OfflineTool;
-import net.hjhjw1991.toolbox.tools.OnlineTool;
+import net.hjhjw1991.toolbox.tools.DpconverterCtl;
 import net.hjhjw1991.toolbox.tools.Tool;
-import net.hjhjw1991.toolbox.tools.Xingjiabi;
+import net.hjhjw1991.toolbox.tools.XingjiabiCtl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,9 +40,11 @@ public class Toolbox extends AppCompatActivity {
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
     private static final Map<Class<? extends Tool>, Integer> mOfflineToolMap;
+    // static register offline tools
     static {
         mOfflineToolMap = new HashMap<>();
-        mOfflineToolMap.put(Xingjiabi.class, R.drawable.balance);
+        mOfflineToolMap.put(XingjiabiCtl.class, R.drawable.balance);
+        mOfflineToolMap.put(DpconverterCtl.class, R.drawable.ic_info_black_24dp);
     }
 
     @Override
@@ -104,7 +105,7 @@ public class Toolbox extends AppCompatActivity {
             for(Class<? extends Tool> tool: mOfflineToolMap.keySet()) {
                 Bitmap originIcon = BitmapFactory.decodeResource(getResources(), mOfflineToolMap.get(tool));
                 Bitmap scaledIcon = Bitmap.createScaledBitmap(originIcon, 200, 200, true);// todo refactor
-                tmp.register(tool.newInstance().setIcon(scaledIcon));
+                tmp.register(tool.newInstance(), scaledIcon);
             }
         } catch(AlreadyRegisteredException | InstantiationException | IllegalAccessException e) {
             LOGD(e.toString());

@@ -1,15 +1,8 @@
 <resources>
     <string name="app_name">便民工具箱</string>
     <string name="action_settings">设置</string>
-    <string name="add">添加</string>
-    <string name="amount_weight">数量(重量)</string>
-    <string name="delete">删除</string>
-    <string name="hint_no_goods">还没有添加商品,在下方添加</string>
-    <string name="good_index">商品序号</string>
-    <string name="name">名称</string>
     <string name="offline_tool_bar">离线工具</string>
     <string name="online_tool_bar">在线工具</string>
-    <string name="price">价格</string>
     <string name="summary_off_offline_work">离线工作</string>
     <string name="summary_off_only_wifi">仅在wifi时联网</string>
     <string name="summary_on_online_work">联网工作</string>
@@ -17,7 +10,8 @@
     <string name="title_allow_cellular_network">允许使用移动网络</string>
     <string name="title_work_mode">工作模式</string>
     <string name="to_be_continued">TO BE CONTINUED</string>
-    <string name="xingjiabi">性价比</string>
+
+    <!--settings-->
     <string name="pref_cellular_network">pref_cellular_network</string>
     <string name="pref_default_display_name">John Smith</string>
     <string name="pref_description_social_recommendations">Recommendations for people to contact</string>
@@ -35,4 +29,19 @@
     <string name="pref_title_system_sync_settings">系统同步设置</string>
     <string name="pref_title_vibrate">震动</string>
     <string name="pref_work_mode">工作模式</string>
+
+    <!--性价比工具-->
+    <string name="good_index">商品序号</string>
+    <string name="name">名称</string>
+    <string name="price">价格</string>
+    <string name="xingjiabi">性价比</string>
+    <string name="hint_no_goods">还没有添加商品,在下方添加</string>
+    <string name="amount_weight">数量(重量)</string>
+    <string name="add">添加</string>
+    <string name="delete">删除</string>
+
+    <!--dp/sp单位转换器-->
+    <string name="dp">dp</string>
+    <string name="sp">sp</string>
+    <string name="dp_sp_desc">关于dp/sp的一些说明</string>
 </resources>

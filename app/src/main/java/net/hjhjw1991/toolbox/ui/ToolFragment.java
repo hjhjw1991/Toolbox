@@ -1,6 +1,7 @@
 package net.hjhjw1991.toolbox.ui;
 
 import android.app.Fragment;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import net.hjhjw1991.toolbox.tools.ToolGroup;
@@ -30,13 +31,15 @@ public class ToolFragment extends Fragment implements ToolGroup {
 
     protected ArrayList<Tool> mRegisteredTool;
     protected HashMap<String, Tool> mRegisteredToolMap;
+    protected HashMap<String, Bitmap> mRegisteredToolIcon;
 
     @Override
-    public void register(Tool tool) throws AlreadyRegisteredException {
+    public void register(Tool tool, Bitmap icon) throws AlreadyRegisteredException {
         if(mRegisteredToolMap.containsKey(tool.getTag())){
             throw new AlreadyRegisteredException(tool.getTag());
         }
         mRegisteredToolMap.put(tool.getTag(), tool);
+        mRegisteredToolIcon.put(tool.getTag(), icon);
         mRegisteredTool.add(tool);
     }
 

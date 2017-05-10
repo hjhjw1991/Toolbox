@@ -1,5 +1,7 @@
 package net.hjhjw1991.toolbox.tools;
 
+import android.graphics.Bitmap;
+
 import net.hjhjw1991.toolbox.exception.AlreadyRegisteredException;
 import net.hjhjw1991.toolbox.tools.Tool;
 
@@ -7,7 +9,7 @@ import net.hjhjw1991.toolbox.tools.Tool;
  * Created by HuangJun on 2016/9/26.
  */
 public interface ToolGroup {
-    void register(Tool tool) throws AlreadyRegisteredException;
+    void register(Tool tool, Bitmap icon) throws AlreadyRegisteredException;
     Tool unregister(int index);
     Tool unregister(String tag);
 }

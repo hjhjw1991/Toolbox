@@ -71,6 +71,8 @@
     <string name="offline_tool_bar">Offline Tools</string>
     <string name="online_tool_bar">Online Tools</string>
     <string name="to_be_continued">TO BE CONTINUED</string>
+
+    <!--XingjiabiTool-->
     <string name="good_index">Index</string>
     <string name="name">Name</string>
     <string name="price">Price</string>
@@ -79,4 +81,8 @@
     <string name="amount_weight">Quantity/Weight</string>
     <string name="add">Add</string>
     <string name="delete">Delete</string>
+
+    <!--DpconverterTool-->
+    <string name="dp">dp</string>
+    <string name="sp">sp</string>
 </resources>

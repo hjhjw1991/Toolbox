@@ -31,6 +31,9 @@
         <activity android:name=".ui.XingjiabiActivity"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTask"/>
+        <activity android:name=".ui.DpconverterActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

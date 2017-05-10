@@ -1,4 +1,4 @@
-package net.hjhjw1991.toolbox.tools;
+package net.hjhjw1991.toolbox.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import net.hjhjw1991.toolbox.R;
+import net.hjhjw1991.toolbox.tools.Tool;
 import net.hjhjw1991.toolbox.ui.ToolFragment;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class OfflineTool extends ToolFragment {
         layout = R.layout.offline_tool;
         mRegisteredTool = new ArrayList<>();
         mRegisteredToolMap = new HashMap<>();
+        mRegisteredToolIcon = new HashMap<>();
         mAdapter = new OfflineAdapter(mRegisteredTool);
     }
 
@@ -74,7 +76,7 @@ public class OfflineTool extends ToolFragment {
             Tool t = mData.get(position);
             ImageButton ib = (ImageButton) holder.itemView.findViewById(R.id.icon_button);
             final Class target = t.getTargetActivity();
-            ib.setImageBitmap(t.getIcon());
+            ib.setImageBitmap(mRegisteredToolIcon.get(t.getTag()));
             ib.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
