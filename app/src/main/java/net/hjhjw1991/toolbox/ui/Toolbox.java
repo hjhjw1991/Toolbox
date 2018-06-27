@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,7 @@ import java.util.Map;
 public class Toolbox extends AppCompatActivity {
     private static final String TAG = "Toolbox";
 
+    Handler h;
     private SparseArray<ToolFragment> mFragments;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
