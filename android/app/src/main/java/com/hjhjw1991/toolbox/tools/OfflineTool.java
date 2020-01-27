@@ -1,4 +1,4 @@
-package net.hjhjw1991.toolbox.tools;
+package com.hjhjw1991.toolbox.tools;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import net.hjhjw1991.toolbox.R;
-import net.hjhjw1991.toolbox.ui.ToolFragment;
+import com.hjhjw1991.toolbox.ui.ToolFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

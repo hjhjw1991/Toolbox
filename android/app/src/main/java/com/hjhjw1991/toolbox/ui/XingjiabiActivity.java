@@ -1,4 +1,4 @@
-package net.hjhjw1991.toolbox.ui;
+package com.hjhjw1991.toolbox.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,8 +16,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import net.hjhjw1991.toolbox.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package net.hjhjw1991.settings;
+package com.hjhjw1991.settings;
 
 
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 
-import net.hjhjw1991.settings.SettingManager;
-import net.hjhjw1991.toolbox.R;
+import com.hjhjw1991.settings.SettingManager;
+import com.hjhjw1991.toolbox.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

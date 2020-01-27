@@ -28,13 +28,6 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 android {
     compileSdkVersion 28
 
-    defaultConfig {
-        applicationId "com.hjhjw1991.toolbox"
-        versionCode 110
-        versionName "1.1.0"
-        testInstrumentationRunner "android.test.InstrumentationTestRunner"
-    }
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -55,12 +48,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            buildConfigField "boolean", "HJDEBUG", "false"
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            buildConfigField "boolean", "HJDEBUG", "true"
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
         }
     }
 }

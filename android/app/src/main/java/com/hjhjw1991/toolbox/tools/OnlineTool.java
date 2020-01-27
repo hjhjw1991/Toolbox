@@ -1,13 +1,13 @@
-package net.hjhjw1991.toolbox.tools;
+package com.hjhjw1991.toolbox.tools;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.hjhjw1991.settings.SettingManager;
-import net.hjhjw1991.settings.SettingsActivity;
-import net.hjhjw1991.toolbox.R;
+import com.hjhjw1991.settings.SettingManager;
+import com.hjhjw1991.settings.SettingsActivity;
+
 import net.hjhjw1991.toolbox.ui.ToolFragment;
 
 /**

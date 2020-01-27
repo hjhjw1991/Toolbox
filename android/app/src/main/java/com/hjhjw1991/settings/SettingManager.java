@@ -1,4 +1,4 @@
-package net.hjhjw1991.settings;
+package com.hjhjw1991.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;

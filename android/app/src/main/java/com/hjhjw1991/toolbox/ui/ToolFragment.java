@@ -1,11 +1,12 @@
-package net.hjhjw1991.toolbox.ui;
+package com.hjhjw1991.toolbox.ui;
 
 import android.app.Fragment;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
-import net.hjhjw1991.toolbox.tools.ToolGroup;
-import net.hjhjw1991.toolbox.exception.AlreadyRegisteredException;
-import net.hjhjw1991.toolbox.tools.Tool;
+import com.hjhjw1991.toolbox.exception.AlreadyRegisteredException;
+import com.hjhjw1991.toolbox.tools.Tool;
+import com.hjhjw1991.toolbox.tools.ToolGroup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,10 +34,10 @@ public class ToolFragment extends Fragment implements ToolGroup {
 
     @Override
     public void register(Tool tool) throws AlreadyRegisteredException {
-        if(mRegisteredToolMap.containsKey(tool.getTag())){
-            throw new AlreadyRegisteredException(tool.getTag());
+        if(mRegisteredToolMap.containsKey(tool.tag())){
+            throw new AlreadyRegisteredException(tool.tag());
         }
-        mRegisteredToolMap.put(tool.getTag(), tool);
+        mRegisteredToolMap.put(tool.tag(), tool);
         mRegisteredTool.add(tool);
     }
 
@@ -44,7 +45,7 @@ public class ToolFragment extends Fragment implements ToolGroup {
     public Tool unregister(int index) {
         if (mRegisteredTool != null && index < mRegisteredTool.size()) {
             Tool tool = mRegisteredTool.remove(index);
-            mRegisteredToolMap.remove(tool.getTag());
+            mRegisteredToolMap.remove(tool.tag());
             return tool;
         }
         return null;
@@ -57,6 +58,36 @@ public class ToolFragment extends Fragment implements ToolGroup {
             mRegisteredTool.remove(tool);
             return tool;
         }
+        return null;
+    }
+
+    @Override
+    public void tag(String tag) {
+
+    }
+
+    @Override
+    public Tool icon(Bitmap icon) {
+        return null;
+    }
+
+    @Override
+    public String tag() {
+        return null;
+    }
+
+    @Override
+    public Bitmap icon() {
+        return null;
+    }
+
+    @Override
+    public String title() {
+        return null;
+    }
+
+    @Override
+    public Class getTargetActivity() {
         return null;
     }
 }

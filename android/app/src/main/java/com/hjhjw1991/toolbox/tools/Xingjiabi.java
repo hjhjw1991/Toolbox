@@ -1,11 +1,8 @@
-package net.hjhjw1991.toolbox.tools;
+package com.hjhjw1991.toolbox.tools;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 
-import net.hjhjw1991.toolbox.ui.XingjiabiActivity;
-
-import java.lang.ref.SoftReference;
+import com.hjhjw1991.toolbox.ui.XingjiabiActivity;
 
 /**Value Over Price Tool
  * Created by HuangJun on 2016/9/26.
@@ -18,27 +15,23 @@ public class Xingjiabi implements Tool {
     public Xingjiabi(){
     }
 
-    public Xingjiabi setIcon(Bitmap icon) {
+    public Xingjiabi icon(Bitmap icon) {
         mIcon = icon;
         return this;
     }
-    @Override
-    public void setTag(String tag) {
+    public void tag(String tag) {
         this.mTag = tag;
     }
 
-    @Override
-    public String getTag() {
+    public String tag() {
         return mTag;
     }
 
-    @Override
-    public Bitmap getIcon() {
+    public Bitmap icon() {
         return mIcon;
     }
 
-    @Override
-    public String getTitle() {
+    public String title() {
         return mTitle;
     }
 
