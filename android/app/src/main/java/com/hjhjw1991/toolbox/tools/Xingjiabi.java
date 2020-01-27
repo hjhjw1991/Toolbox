@@ -2,8 +2,6 @@ package com.hjhjw1991.toolbox.tools;
 
 import android.graphics.Bitmap;
 
-import com.hjhjw1991.toolbox.ui.XingjiabiActivity;
-
 /**Value Over Price Tool
  * Created by HuangJun on 2016/9/26.
  */
@@ -37,6 +35,6 @@ public class Xingjiabi implements Tool {
 
     @Override
     public Class getTargetActivity() {
-        return XingjiabiActivity.class;
+        return null;
     }
 }
